@@ -4,8 +4,8 @@ import com.example.ChestOfWar.model.units.unit_states.States;
 
 public class Archer extends Unit{
 
-    public Archer(String name) {
-        super(name);
+    public Archer(String name, int[] coordinates) {
+        super(name, coordinates);
     }
 
     @Override
@@ -15,10 +15,10 @@ public class Archer extends Unit{
 
     @Override
     public String toString() {
-        if (this.state == States.ALIVE) {
-            return String.format("Я лучник %s. Живой и собираюсь таким остаться.", this.name);
+        if (this.getState() == States.ALIVE) {
+            return String.format("Я лучник %s c ID %d. Живой и собираюсь таким остаться.", this.getName(), this.getID());
         } else {
-            return String.format("Я лучник %s. Умер, но мне и здесь неплохо.", this.name);
+            return String.format("Я лучник %s c ID %d. Умер, но мне и здесь неплохо.", this.getName(), this.getID());
         }
 
     }

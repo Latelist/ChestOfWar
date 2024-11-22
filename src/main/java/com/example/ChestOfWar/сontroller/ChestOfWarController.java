@@ -10,10 +10,10 @@ public class ChestOfWarController {
     @GetMapping //функция с такой аннотацией возвращает шаблон, который соответствует имени строки
     public String game() {
 
-        Unit archer1 = new Archer("archer1");
+        Unit archer1 = new Archer("archer1", new int[]{0, 0});
         System.out.println(archer1.toString());
 
-        Unit archer2 = new Archer("archer2");
+        Unit archer2 = new Archer("archer2", new int[]{0, 0});
         System.out.println(archer2);
 
         archer2.attack(archer1);
