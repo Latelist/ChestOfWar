@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СУНДУК ВОЙНЫ доска</title>
+    <style>
+        .board {
+            position: relative;
+            width: 480px;
+            height: 480px;
+        }
+        .cell {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #b58863;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cell:hover {
+            background-color: #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Доска</h1>
+<div id="board" class="board"></div>
+
+<p id="coordinates">Координаты: </p>
+
+<script>
+    // Используем переданные из контроллера переменные rows и cols
+    const rows = ${rows};  // Передается значение из контроллера
+    const cols = ${cols};  // Передается значение из контроллера
+    const row = ${row};
+    const col = ${col};
+    // Функция для генерации доски
+    function generateBoard() {
+        const board = document.getElementById('board');
+        if (!board) {
+            console.error("Элемент с id 'board' не найден!");
+            return;
+        }
+
+        const cellSize = ${cellSize};
+        const rowOffset = ${rowOffset};
+
+
+        console.log('Генерация доски...');
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                const cell = document.createElement('div');
+                const xOffset = ${xOffset};
+                xOffset = (row % 2 === 0) ? 0 : cellSize / 2; // Сдвиг для нечетных рядов
+
+                cell.classList.add('cell');
+                cell.style.top = `${row * rowOffset}px`;
+                cell.style.left = `${col * cellSize + xOffset}px`;
+                cell.setAttribute('data-row', row);
+                cell.setAttribute('data-col', col);
+                cell.onclick = () => showCoordinates(row, col);
+                cell.textContent = `${row}, ${col}`;
+
+                board.appendChild(cell);
+            }
+        }
+
+        console.log('Доска сгенерирована.');
+    }
+
+    // Функция для отображения координат
+    function showCoordinates(row, col) {
+        document.getElementById('coordinates').innerText = `Координаты: (${row}, ${col})`;
+    }
+
+    // Вызываем generateBoard только после загрузки страницы
+    window.onload = function() {
+        generateBoard();
+    };
+</script>
+
+
+</body>
+</html>

@@ -21,11 +21,36 @@ public class ChestOfWarController {
         archer2.attack(archer1);
         System.out.println(archer1);
 
+
+
         model.addAttribute("unit", archer1);
+
+
         return "game";
     }
     @GetMapping("/game-board")
-    public String showGameBoard() {
+    public String showGameBoard(Model model) {
+        int rows = 1;
+        int cols = 1;
+
+        model.addAttribute("rows", rows);
+        model.addAttribute("cols", cols);
+
+        int row = 0;
+        int col = 0;
+
+        model.addAttribute("row", row);
+        model.addAttribute("col", col);
+
+        int rowOffset = 52;
+        model.addAttribute("rowOffset", rowOffset);
+
+        int cellSize = 50;
+        model.addAttribute("cellSize", cellSize);
+
+        int xOffset = 0;
+        model.addAttribute("xOffset", xOffset);
+
         return "game-board";
     }
 
