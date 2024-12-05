@@ -1,1 +1,3 @@
-alert('Здарова, щегол!');
+"use strict"
+let message = "Здарова, щегол!"
+alert(message);
