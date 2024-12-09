@@ -1,5 +1,6 @@
 package com.example.ChestOfWar.сontroller;
 
+import com.example.ChestOfWar.model.board.HexagonGrid;
 import com.example.ChestOfWar.model.units.Archer;
 import com.example.ChestOfWar.model.units.Unit;
 import org.springframework.stereotype.Controller;
@@ -30,26 +31,8 @@ public class ChestOfWarController {
     }
     @GetMapping("/game-board")
     public String showGameBoard(Model model) {
-        int rows = 1;
-        int cols = 1;
-
-        model.addAttribute("rows", rows);
-        model.addAttribute("cols", cols);
-
-        int row = 0;
-        int col = 0;
-
-        model.addAttribute("row", row);
-        model.addAttribute("col", col);
-
-        int rowOffset = 52;
-        model.addAttribute("rowOffset", rowOffset);
-
-        int cellSize = 50;
-        model.addAttribute("cellSize", cellSize);
-
-        int xOffset = 0;
-        model.addAttribute("xOffset", xOffset);
+        HexagonGrid board = new HexagonGrid(3,3, 50);
+        System.out.println(board);
 
         return "game-board";
     }

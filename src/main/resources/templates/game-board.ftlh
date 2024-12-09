@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <canvas id="hexagonCanvas" width="300" height="300"></canvas>
+    <canvas id="hexCanvas" width="600" height="600"></canvas>
     <script src="/js/board.js"></script>
 <!--    <script src="/js/alert.js"></script>-->
 </body>
