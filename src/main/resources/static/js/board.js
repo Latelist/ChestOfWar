@@ -1,6 +1,13 @@
 const canvas = document.getElementById("hexCanvas");
 const ctx = canvas.getContext("2d");
-const hexRadius = 30;  // радиус шестиугольника
+
+const canvasWidth = canvas.width;
+const canvasHeight = canvas.height;
+
+const centerX = canvasWidth / 2;
+const centerY = canvasHeight / 2;
+
+const hexRadius = 50;  // радиус шестиугольника
 
 const hexagons = [
     { x: 0, y: 0 },
@@ -13,14 +20,16 @@ const hexagons = [
     // Добавьте сюда больше шестиугольников по вашему требованию
 ];
 
+
+
 // Функция для вычисления позиции шестиугольников по координатам на канвасе
-function hexToPixel(x, y) {
-    const width = hexRadius * Math.sqrt(3);  // ширина шестиугольника
-    const height = hexRadius * 2;            // высота шестиугольника
+function countTheShift(x, y) {
+    const width = hexRadius * 2;  // ширина шестиугольника
+    const height = hexRadius * Math.sqrt(3);            // высота шестиугольника
 
     // Вычисляем смещения для положения шестиугольников
-    const px = x * width * 3 / 4;  // смещение по X
-    const py = y * height + (x % 2) * (height / 2);  // смещение по Y (сдвиг на четные строки)
+    const px = x * width * 3 / 4 + centerX;  // смещение по X
+    const py = y * height + (x % 2) * (height / 2) + centerY;  // смещение по Y (сдвиг на четные строки)
 
     return { x: px, y: py };
 }
@@ -45,15 +54,13 @@ function drawHexagon(x, y, size) {
     ctx.stroke();
 }
 
-function drawHexagonGrid(ctx, hexagons) {
+function drawHexagonGrid(hexagons) {
     for (let i = 0; i < hexagons.length; i++) {
         const hex = hexagons[i];
-        const pixel = hexToPixel(hex.x, hex.y);
-        drawHexagon(ctx, pixel.x, pixel.y, hexRadius);
+        const pixel = countTheShift(hex.x, hex.y);
+        drawHexagon(pixel.x, pixel.y, hexRadius);
     }
 }
 
-drawHexagon(150, 150, 50);
-
-drawHexagonGrid(ctx, hexagons);
+drawHexagonGrid(hexagons);
 
