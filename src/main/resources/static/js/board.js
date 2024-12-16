@@ -8,15 +8,29 @@ const centerX = canvasWidth / 2;
 const centerY = canvasHeight / 2;
 
 const hexRadius = 50;  // радиус шестиугольника
+const width = hexRadius * 2; // ширина шестиугольника
+const height = hexRadius * Math.sqrt(3); // высота шестиугольника
 
 const hexagons = [
     { x: 0, y: 0 },
     { x: 1, y: 0 },
     { x: 0, y: 1 },
-    { x: 1, y: 1 },
+    { x: -1, y: 1 },
+    { x: -1, y: 0 },
+    { x: 0, y: -1 },
+    { x: 1, y: -1 },
     { x: 2, y: 0 },
     { x: 2, y: 1 },
-    { x: 1, y: 2 },
+    { x: 1, y: 1 },
+    { x: 0, y: 2 },
+    { x: -1, y: 2},
+    { x: -2, y: 1},
+    { x: -2, y: 0},
+    { x: -2, y: -1},
+    { x: -1, y: -1},
+    { x: 0, y: -2},
+    { x: 1, y: -2},
+    { x: 2, y: -1},
     // Добавьте сюда больше шестиугольников по вашему требованию
 ];
 
@@ -24,9 +38,6 @@ const hexagons = [
 
 // Функция для вычисления позиции шестиугольников по координатам на канвасе
 function countTheShift(x, y) {
-    const width = hexRadius * 2;  // ширина шестиугольника
-    const height = hexRadius * Math.sqrt(3);            // высота шестиугольника
-
     // Вычисляем смещения для положения шестиугольников
     const px = x * width * 3 / 4 + centerX;  // смещение по X
     const py = y * height + (x % 2) * (height / 2) + centerY;  // смещение по Y (сдвиг на четные строки)

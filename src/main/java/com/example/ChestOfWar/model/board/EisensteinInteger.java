@@ -18,6 +18,6 @@ public class EisensteinInteger {
 
     @Override
     public String toString() {
-        return a + " + " + b + "w";
+        return "{" + "\"x\": " + a + ", \"y\": " + b + "}";
     }
 }

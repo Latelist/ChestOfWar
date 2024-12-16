@@ -1,6 +1,7 @@
 package com.example.ChestOfWar.model.board;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.Gson;
 
 public class HexagonGrid {
     public List<EisensteinInteger> hexagons;
@@ -52,8 +53,8 @@ public class HexagonGrid {
 
     @Override
     public String toString() {
-        return "HexagonGrid{" +
-                "hexagons=" + hexagons +
-                '}';
+        Gson gson = new Gson();
+
+        return gson.toJson(this.hexagons);
     }
 }
