@@ -11,6 +11,7 @@
 
 <body>
     <canvas id="hexCanvas" width="1000" height="1000"></canvas>
+    <pre id="output"></pre>
     <script src="/js/board.js"></script>
 <!--    <script src="/js/alert.js"></script>-->
 </body>

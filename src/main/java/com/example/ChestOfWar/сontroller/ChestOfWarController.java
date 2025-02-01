@@ -6,6 +6,7 @@ import com.example.ChestOfWar.model.units.Unit;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller //класс, который отвечает за прием HTTP-запросов
 public class ChestOfWarController {
@@ -31,10 +32,16 @@ public class ChestOfWarController {
     }
     @GetMapping("/game-board")
     public String showGameBoard(Model model) {
-        HexagonGrid board = new HexagonGrid(3,3, 50);
-        System.out.println(board);
-
+//        HexagonGrid board = new HexagonGrid();
+//        String coordinatesJson = board.toGson(board.gridToArray(board.hexagons));
         return "game-board";
+    }
+
+    @GetMapping("/api/coordinates")
+    @ResponseBody
+    public String getCoordinatesJson() {
+        HexagonGrid board = new HexagonGrid();
+        return board.toGson(board.gridToArray(board.hexagons));
     }
 
 

@@ -1,54 +1,57 @@
 package com.example.ChestOfWar.model.board;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import com.google.gson.Gson;
-
+import org.jetbrains.annotations.NotNull;
+//идея: может сделать не круглую сетку, а с нормальным количеством ячеек типа прямоугольную?
+//А ненужные ячейки выпилить потом?
 public class HexagonGrid {
-    public List<EisensteinInteger> hexagons;
+    public ArrayList<EisensteinInteger> hexagons;
 
     // Конструктор для инициализации
-    public HexagonGrid(int rows, int cols, double size) {
-        this.hexagons = generateHexagonGrid(rows, cols, size);
+    public HexagonGrid() {
+        this.hexagons = new ArrayList<EisensteinInteger>();
+        generateHexagonGrid(hexagons);
     }
 
-    // Метод для генерации шестиугольной решетки
-    public List<EisensteinInteger> generateHexagonGrid(int rows, int cols, double size) {
-        // Смещения для соседей по числам Эйзенштейна
-        EisensteinInteger[] directions = {
-                new EisensteinInteger(1, 0),  // Направление вправо
-                new EisensteinInteger(-1, 1), // Направление влево-вверх
-                new EisensteinInteger(0, 1),  // Направление вверх
-                new EisensteinInteger(1, 1),  // Направление вправо-вверх
-                new EisensteinInteger(1, -1), // Направление вправо-вниз
-                new EisensteinInteger(0, -1)  // Направление вниз
-        };
-
-        List<EisensteinInteger> hexagons = new ArrayList<>();
-
-        // Центральная точка (0, 0) будет центром первого шестиугольника
-        EisensteinInteger center = new EisensteinInteger(0, 0);
-        hexagons.add(center); // Добавляем центральный шестиугольник
-
-        // Генерация координат для всех шестиугольников на поле
-        // Используем размеры поля (rows и cols)
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                // Начинаем от центральной точки
-                EisensteinInteger currentHex = center;
-
-                // Смещение по строкам и столбцам
-                // Смещения по x и y зависят от позиции в сетке
-                EisensteinInteger offset = new EisensteinInteger(col, row);
-
-                // Применяем смещение для каждого шестиугольника в поле
-                currentHex = currentHex.add(offset);
-
-                // Добавляем вычисленную точку в список
-                hexagons.add(currentHex);
-            }
-        }
-
-        return hexagons;
+    public void generateHexagonGrid(ArrayList<EisensteinInteger> hexagons) {
+        hexagons.add(new EisensteinInteger(0,0));
+        hexagons.add(new EisensteinInteger(1,0));
+        hexagons.add(new EisensteinInteger(0,1));
+        hexagons.add(new EisensteinInteger(-1,1));
+        hexagons.add(new EisensteinInteger(-1,0));
+        hexagons.add(new EisensteinInteger(0,-1));
+        hexagons.add(new EisensteinInteger(1,-1));
+        hexagons.add(new EisensteinInteger(2,0));
+        hexagons.add(new EisensteinInteger(2,1));
+        hexagons.add(new EisensteinInteger(1,1));
+        hexagons.add(new EisensteinInteger(0,2));
+        hexagons.add(new EisensteinInteger(-1,2));
+        hexagons.add(new EisensteinInteger(-2,1));
+        hexagons.add(new EisensteinInteger(-2,0));
+        hexagons.add(new EisensteinInteger(-2,-1));
+        hexagons.add(new EisensteinInteger(-1,-1));
+        hexagons.add(new EisensteinInteger(0,-2));
+        hexagons.add(new EisensteinInteger(1,-2));
+        hexagons.add(new EisensteinInteger(2,-1));
+        hexagons.add(new EisensteinInteger(3,0));
+        hexagons.add(new EisensteinInteger(3,1));
+        hexagons.add(new EisensteinInteger(2,2));
+        hexagons.add(new EisensteinInteger(0,-1));
+        hexagons.add(new EisensteinInteger(1,2));
+        hexagons.add(new EisensteinInteger(0,3));
+        hexagons.add(new EisensteinInteger(-1,3));
+        hexagons.add(new EisensteinInteger(-2,2));
+        hexagons.add(new EisensteinInteger(-3,2));
+        hexagons.add(new EisensteinInteger(-3,1));
+        hexagons.add(new EisensteinInteger(-3,0));
+        hexagons.add(new EisensteinInteger(-3,-1));
+        hexagons.add(new EisensteinInteger(-2,-2));
+        hexagons.add(new EisensteinInteger(-1,-2));
+        hexagons.add(new EisensteinInteger(0,-3));
+        hexagons.add(new EisensteinInteger(1,-3));
+        hexagons.add(new EisensteinInteger(2,-2));
+        hexagons.add(new EisensteinInteger(3,-2));
+        hexagons.add(new EisensteinInteger(3,-1));
     }
 
     @Override
@@ -57,4 +60,21 @@ public class HexagonGrid {
 
         return gson.toJson(this.hexagons);
     }
+
+    public ArrayList<int[]> gridToArray(ArrayList<EisensteinInteger> hexagons) {
+        ArrayList<int[]> coordinateArray = new ArrayList<>();
+        for (EisensteinInteger hexagon : hexagons) {
+            int[] coordinates = new int[2];
+            coordinates[0] = hexagon.a;
+            coordinates[1] = hexagon.b;
+            coordinateArray.add(coordinates);
+        }
+        return coordinateArray;
+    }
+
+    public String toGson(ArrayList<int[]> coordinateArray) {
+        Gson gson = new Gson();
+        return gson.toJson(coordinateArray);
+    }
+
 }
